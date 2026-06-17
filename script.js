@@ -103,7 +103,35 @@ function displayProducts(productsToShow = products) {
     {
         console.log('Not on products page, skipping display');
     }
+
+    // For the PRODUCTS page
+    if (window.location.pathname.includes('products')) {
+        displayProducts(); // shows all products on products page
+    }   
+
+    // For the HOME page featured section
+    if (document.getElementById('featured-products')) {
+        displayFeaturedProducts(); // shows featured products on homepage
+    }
+
 } 
+
+function displayFeaturedProducts() {
+    const featuredContainer = document.getElementById('featured-products');
+    if (!featuredContainer) return;
+
+    // Show only first 4 products as "featured"
+    const featured = products.slice(0, 4);
+
+    featuredContainer.innerHTML = featured.map(product => `
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>R ${product.price.toLocaleString()}</p>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+        </div>
+    `).join('');
+}
 
 function addToCart(productId) {
     alert(`Product ${productId} added to cart!`);
