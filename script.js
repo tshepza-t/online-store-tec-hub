@@ -46,7 +46,39 @@ const products = [
         category: "accessories",
         image: "https://th.bing.com/th/id/OIP.cJbtKKZbERFQBr5-_ftO7gHaHa?r=0&rs=1&pid=ImgDetMain",
         description: "Ergonomic wireless mouse for productivity"
-    }
+    },
+    {
+        id: 7,
+        name: "iPhone 16 ",
+        price: 2900,
+        category: "phones",
+        image: "https://www.bing.com/aclick?ld=e8yH8UPeRxgJJT74kO-6RXVDVUCUwx-ruOaP6x_POtd04HMhHWeZpNcJHTYx2_X6czzxoNb4eDGq-PoAHV5pdpzkRhdA0bJeLbmJlYcJltb8A-edk3bIjXhAgTlkgFGlY1L62JJl_OtB0Cez358yUu3IlgWkNGXcLcHgVMPF0PFY7DcR-mub7eK5ysMC6PNqBqanYuY5XSk7muhwNiGfVGum_tXfw&u=aHR0cHMlM2ElMmYlMmZ3d3cuaXN0b3JlLmNvLnphJTJmaXBob25lLTE2LTEyOGdiLWJsYWNrLW15ZTczcW4tYSUzZnV0bV9zb3VyY2UlM2RiaW5nJTI2dXRtX21lZGl1bSUzZHBhaWQlMjZ1dG1fY2FtcGFpZ24lM2RRMTI2X01pY3Jvc29mdFNob3BwaW5nJTI2dXRtX3Rlcm0lM2RTYWxlcyUyNnV0bV9jb250ZW50JTNkQU9fQXBwbGVHZW5lcmFsU3RhbmRhcmQlMjZtc2Nsa2lkJTNkNzRjNTcwZmM4MDE0MTEwZGU2OTcxYWM4YmY4ZTRlMWM&rlid=74c570fc8014110de6971ac8bf8e4e1c&ntb=1",
+        description: "The latest iPhone with amazing camera and performance"
+    },
+    {
+        id: 8,
+        name: "iPhone 17 Pro Max ",
+        price: 5400,
+        category: "phones",
+        image: "https://www.bing.com/th?id=OPEC.yb6%2f2xLts4o6zQ474C474&o=5&pid=21.1&w=128&h=168&qlt=100&dpr=1,3&o=2&bw=6&bc=FFFFFF",
+        description: "The latest iPhone with amazing camera and performance"
+    },
+    {
+        id: 9,
+        name: "Samsung S25 Plus ",
+        price: 5100,
+        category: "phones",
+        image: "https://www.bing.com/th/id/OIP.AbVpNo9snSdb2gWIvassswHaD4?w=312&h=200&c=8&rs=1&o=6&dpr=1.3&pid=3.1&rm=2",
+        description: "The latest iPhone with amazing camera and performance"
+    },
+    {
+        id: 10,
+        name: "Samsung S26 Ultra ",
+        price: 6000,
+        category: "phones",
+        image: "https://th.bing.com/th/id/OIP.Ervqbp_ZoxafMavf6n_WfAHaHa?w=105&h=108&c=7&qlt=90&bgcl=c02651&r=0&o=6&dpr=1.3&pid=13.1",
+        description: "The latest iPhone with amazing camera and performance"
+    },
 ];
 
 // Shopping cart array
