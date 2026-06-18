@@ -269,9 +269,9 @@ document.addEventListener('DOMContentLoaded', function () {
     displayFeaturedProducts(); // only fires if featured-products exists (home page)
     displayCart();           // only fires if cart-items exists (cart page)
     setupFilters();          // only fires if filter buttons exist (products page)
-},
 
-// ── DARK MODE TOGGLE ─────────────────────
+
+   // ── DARK MODE TOGGLE ─────────────────────
 function toggleTheme() {
     const body = document.body;
     const icon = document.querySelector('.theme-icon');
@@ -286,7 +286,7 @@ function toggleTheme() {
         icon.textContent = '🌙';
         localStorage.setItem('techvibe_theme', 'light');
     }
-},
+}
 
 // Remember user's theme preference across pages
 function loadTheme() {
@@ -299,9 +299,11 @@ function loadTheme() {
     } else {
         if (icon) icon.textContent = '🌙';
     }
-},
+}
 
 // Load theme as soon as page opens
 loadTheme()
+ 
+}
 
 );
