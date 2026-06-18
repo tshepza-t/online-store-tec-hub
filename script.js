@@ -269,4 +269,39 @@ document.addEventListener('DOMContentLoaded', function () {
     displayFeaturedProducts(); // only fires if featured-products exists (home page)
     displayCart();           // only fires if cart-items exists (cart page)
     setupFilters();          // only fires if filter buttons exist (products page)
-});
+},
+
+// ── DARK MODE TOGGLE ─────────────────────
+function toggleTheme() {
+    const body = document.body;
+    const icon = document.querySelector('.theme-icon');
+
+    body.classList.toggle('dark-mode');
+
+    // Update the icon
+    if (body.classList.contains('dark-mode')) {
+        icon.textContent = '☀️';
+        localStorage.setItem('techvibe_theme', 'dark');
+    } else {
+        icon.textContent = '🌙';
+        localStorage.setItem('techvibe_theme', 'light');
+    }
+},
+
+// Remember user's theme preference across pages
+function loadTheme() {
+    const saved = localStorage.getItem('techvibe_theme');
+    const icon = document.querySelector('.theme-icon');
+
+    if (saved === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (icon) icon.textContent = '☀️';
+    } else {
+        if (icon) icon.textContent = '🌙';
+    }
+},
+
+// Load theme as soon as page opens
+loadTheme()
+
+);
