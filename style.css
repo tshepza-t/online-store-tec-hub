@@ -252,7 +252,7 @@ body{
 
 .ticker-content {
     display: inline-block;
-    animation: ticker-scroll 50s linear infinite;
+    animation: ticker-scroll 30s linear infinite;
 }
 
 .ticker-content span {
