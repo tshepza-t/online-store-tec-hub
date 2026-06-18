@@ -49,138 +49,192 @@ const products = [
     }
 ];
 
-// Step 2: Creating out shopping cart
-// This will store all items the customer wants to buy
-
+// Shopping cart array
 let cart = [];
 
-//Step 3: Get refrences to HTML elements
-// This connects our JS to specific parts of our webpage
-
+// HTML element references
 const cartCountElement = document.getElementById('cart-count');
 const productsGrid = document.getElementById('products-grid');
 const featuredProducts = document.getElementById('featured-products');
 
-// Step 4: Utility function to format
-// This will make a price look like "R999" instead of "999"
-
+// Format price as Rands
 function formatPrice(price) {
-    return 'R' + price.toFixed(2)
+    return 'R ' + price.toLocaleString('en-ZA', { minimumFractionDigits: 2 });
 }
 
 console.log('JavaScript Loaded successfully!');
 console.log('We have', products.length, 'products.');
 
-//
+// ── BUILD A SINGLE PRODUCT CARD ──────────────────────────────
 function createProductCard(product) {
     return `
-       <div class="product-card">
-           <img src="${product.image}" alt="${product.name}" class="product-image">
-           <div class="product-info">
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <div class="product-info">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">${product.description}</p>
-                <div class="product-price">
-                     ${formatPrice(product.price)}
-                </div>
+                <div class="product-price">${formatPrice(product.price)}</div>
                 <div class="product-actions">
-                     <button class="btn btn-primary btn-small" onclick="addToCart(${product.id})">
+                    <button class="btn btn-primary btn-small" onclick="addToCart(${product.id})">
                         Add to Cart
-                     </button>
-                     <button class="btn btn-primary btn-small" onclick="viewProduct(${product.id})">
-                         View Details
-                     </button>
+                    </button>
+                    <button class="btn btn-primary btn-small" onclick="viewProduct(${product.id})">
+                        View Details
+                    </button>
                 </div>
-           </div>
-       </div>   `
-} 
+            </div>
+        </div>`;
+}
 
+// ── PRODUCTS PAGE — show all / filtered products ─────────────
 function displayProducts(productsToShow = products) {
-    if (productsGrid) {
-        console.log('Displaying products... on products page');
-        const productsHTML = productsToShow.map(createProductCard).join('');
-        productsGrid.innerHTML = productsHTML;
-    } else 
-    {
-        console.log('Not on products page, skipping display');
-    }
+    if (!productsGrid) return; // not on products page, do nothing
+    console.log('Displaying', productsToShow.length, 'products on products page');
+    productsGrid.innerHTML = productsToShow.map(createProductCard).join('');
+}
 
-    // For the PRODUCTS page
-    if (window.location.pathname.includes('products')) {
-        displayProducts(); // shows all products on products page
-    }   
-
-    // For the HOME page featured section
-    if (document.getElementById('featured-products')) {
-        displayFeaturedProducts(); // shows featured products on homepage
-    }
-
-} 
-
+// ── HOME PAGE — show first 4 as featured ────────────────────
 function displayFeaturedProducts() {
     const featuredContainer = document.getElementById('featured-products');
-    if (!featuredContainer) return;
-
-    // Show only first 4 products as "featured"
+    if (!featuredContainer) return; // not on home page, do nothing
+    console.log('Displaying featured products on home page');
     const featured = products.slice(0, 4);
+    featuredContainer.innerHTML = featured.map(createProductCard).join('');
+}
 
-    featuredContainer.innerHTML = featured.map(product => `
-        <div class="product-card">
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>R ${product.price.toLocaleString()}</p>
-            <button onclick="addToCart(${product.id})">Add to Cart</button>
-        </div>
-    `).join('');
+// ── CART ────────────────────────────────────────────────────
+function updateCartCount() {
+    const cartCountEl = document.getElementById('cart-count');
+    if (cartCountEl) {
+        cartCountEl.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    }
 }
 
 function addToCart(productId) {
-    alert(`Product ${productId} added to cart!`);
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const existing = cart.find(item => item.id === productId);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+
+    // Save to localStorage so cart persists on refresh
+    localStorage.setItem('techvibe_cart', JSON.stringify(cart));
+    updateCartCount();
+
+    console.log('Cart updated:', cart);
+    alert(`✅ ${product.name} added to cart!`);
 }
 
 function viewProduct(productId) {
-    const product = products.find(prod => prod.id === productId);
-    alert('Product: ' + product.name +
-         '\nPrice: ' + formatPrice(product.price) +
-          '\nDescription: ' + product.description);
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    alert(
+        'Product: ' + product.name +
+        '\nPrice: ' + formatPrice(product.price) +
+        '\nCategory: ' + product.category +
+        '\nDescription: ' + product.description
+    );
 }
 
+// ── CART PAGE — render cart items ───────────────────────────
+function displayCart() {
+    const cartContainer = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    if (!cartContainer) return; // not on cart page, do nothing
+
+    // Load cart from localStorage
+    const saved = localStorage.getItem('techvibe_cart');
+    if (saved) cart = JSON.parse(saved);
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = `
+            <div style="text-align:center; padding: 60px 20px;">
+                <h2>🛒 Your cart is empty</h2>
+                <p style="color:#666; margin: 12px 0 24px;">Looks like you haven't added anything yet.</p>
+                <a href="/products" class="btn btn-primary">Browse Products</a>
+            </div>`;
+        if (cartTotal) cartTotal.textContent = 'Total: R 0.00';
+        return;
+    }
+
+    cartContainer.innerHTML = cart.map(item => `
+        <div class="cart-item" style="display:flex; align-items:center; gap:16px; padding:16px; border-bottom:1px solid #eee;">
+            <img src="${item.image}" alt="${item.name}" style="width:80px; height:80px; object-fit:contain;">
+            <div style="flex:1">
+                <h3>${item.name}</h3>
+                <p>${formatPrice(item.price)} each</p>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <button class="btn btn-small" onclick="changeQty(${item.id}, -1)">−</button>
+                <span>${item.quantity}</span>
+                <button class="btn btn-small" onclick="changeQty(${item.id}, 1)">+</button>
+            </div>
+            <div><strong>${formatPrice(item.price * item.quantity)}</strong></div>
+            <button class="btn btn-small" style="background:#ff4444;color:white;" onclick="removeFromCart(${item.id})">Remove</button>
+        </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    if (cartTotal) cartTotal.textContent = 'Total: ' + formatPrice(total);
+    updateCartCount();
+}
+
+function changeQty(productId, change) {
+    const item = cart.find(i => i.id === productId);
+    if (!item) return;
+    item.quantity += change;
+    if (item.quantity <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+    }
+    localStorage.setItem('techvibe_cart', JSON.stringify(cart));
+    displayCart();
+    updateCartCount();
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(i => i.id !== productId);
+    localStorage.setItem('techvibe_cart', JSON.stringify(cart));
+    displayCart();
+    updateCartCount();
+}
+
+// ── FILTER BUTTONS (products page) ──────────────────────────
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-
     filterButtons.forEach(button => {
-
-        //Adding a click EventListener
-        button.addEventListener('click', function() {
-
-        ///Remove active from all Buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'))
-        
-        //Add active class to the Clicked Button
-        this.classList.add('active');
-        
-        //Get the Category from the buttons data-category attribute
-        const category = this.getAttribute('data-category')
-
-        //Filter products based on category
-        let filteredProducts;
-        if(category === 'all'){
-            filteredProducts = products
-        } else {
-            filteredProducts = products.filter(product => product.category === category);
-        }
-
-        displayProducts(filteredProducts);
-
-        console.log('Showing', filteredProducts.length, 'products in category: ', category)
-       });
-   });
+        button.addEventListener('click', function () {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            const category = this.getAttribute('data-category');
+            const filtered = category === 'all'
+                ? products
+                : products.filter(p => p.category === category);
+            displayProducts(filtered);
+            console.log('Showing', filtered.length, 'products in category:', category);
+        });
+    });
 }
 
+// ── LOAD CART COUNT ON EVERY PAGE ───────────────────────────
+function loadCartFromStorage() {
+    const saved = localStorage.getItem('techvibe_cart');
+    if (saved) {
+        cart = JSON.parse(saved);
+        updateCartCount();
+    }
+}
+
+// ── INIT — runs when page is ready ──────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('Page Loaded dispalying products...');
-    displayProducts();
-    setupFilters();
+    console.log('Page loaded — initialising TechVibe...');
 
-}) 
-
-  
+    loadCartFromStorage();   // always load cart count in navbar
+    displayProducts();       // only fires if products-grid exists (products page)
+    displayFeaturedProducts(); // only fires if featured-products exists (home page)
+    displayCart();           // only fires if cart-items exists (cart page)
+    setupFilters();          // only fires if filter buttons exist (products page)
+});
