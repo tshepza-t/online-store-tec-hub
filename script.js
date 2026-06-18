@@ -260,35 +260,22 @@ function loadCartFromStorage() {
     }
 }
 
-// ── INIT — runs when page is ready ──────────────────────────
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('Page loaded — initialising TechVibe...');
-
-    loadCartFromStorage();   // always load cart count in navbar
-    displayProducts();       // only fires if products-grid exists (products page)
-    displayFeaturedProducts(); // only fires if featured-products exists (home page)
-    displayCart();           // only fires if cart-items exists (cart page)
-    setupFilters();          // only fires if filter buttons exist (products page)
-
-
-   // ── DARK MODE TOGGLE ─────────────────────
+// ── DARK MODE — OUTSIDE everything so button can reach it ───
 function toggleTheme() {
     const body = document.body;
     const icon = document.querySelector('.theme-icon');
 
     body.classList.toggle('dark-mode');
 
-    // Update the icon
     if (body.classList.contains('dark-mode')) {
-        icon.textContent = '☀️';
+        if (icon) icon.textContent = '☀️';
         localStorage.setItem('techvibe_theme', 'dark');
     } else {
-        icon.textContent = '🌙';
+        if (icon) icon.textContent = '🌙';
         localStorage.setItem('techvibe_theme', 'light');
     }
 }
 
-// Remember user's theme preference across pages
 function loadTheme() {
     const saved = localStorage.getItem('techvibe_theme');
     const icon = document.querySelector('.theme-icon');
@@ -301,9 +288,14 @@ function loadTheme() {
     }
 }
 
-// Load theme as soon as page opens
-loadTheme()
- 
-}
+// ── INIT — runs when page is ready ──────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Page loaded — initialising TechVibe...');
 
-);
+    loadCartFromStorage();
+    displayProducts();
+    displayFeaturedProducts();
+    displayCart();
+    setupFilters();
+    loadTheme();        // ✅ called here after DOM is ready
+});
