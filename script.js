@@ -481,6 +481,112 @@ function toggleTheme() {
     }
 }
 
+// Chechout
+        function loadSidebar() {
+            const saved = localStorage.getItem('techvibe_cart');
+            if (saved) cart = JSON.parse(saved);
+            const container = document.getElementById('sidebar-items');
+            if (!cart.length) { container.innerHTML = '<p style="font-size:13px;color:#94a3b8;">Your cart is empty.</p>'; return; }
+            container.innerHTML = cart.map(item => `<div class="sidebar-item"><span class="sidebar-item-name">${item.name} × ${item.quantity}</span><span>${formatPrice(item.price * item.quantity)}</span></div>`).join('');
+            const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+            const delivery = subtotal >= 5000 ? 0 : 99;
+            document.getElementById('sidebar-subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('sidebar-delivery').textContent = delivery === 0 ? '🎉 FREE' : formatPrice(delivery);
+            document.getElementById('sidebar-total').textContent = formatPrice(subtotal + delivery);
+        }
+
+        function goToStep(step) {
+            if (step === 2 && !validateDelivery()) return;
+            document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('panel-' + step).classList.add('active');
+            for (let i = 1; i <= 4; i++) {
+                const ind = document.getElementById('step-indicator-' + i);
+                ind.classList.remove('active', 'done');
+                if (i < step) ind.classList.add('done');
+                if (i === step) ind.classList.add('active');
+            }
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('line-' + i).classList.toggle('done', i < step);
+            }
+            if (step === 2) renderReview();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateDelivery() {
+            let valid = true;
+            const fields = [
+                { id: 'firstName', check: v => v.trim().length >= 2 },
+                { id: 'lastName',  check: v => v.trim().length >= 2 },
+                { id: 'email',     check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+                { id: 'phone',     check: v => /^0\d{9}$/.test(v.replace(/\s/g,'')) },
+                { id: 'address',   check: v => v.trim().length >= 5 },
+                { id: 'city',      check: v => v.trim().length >= 2 },
+                { id: 'postalCode',check: v => /^\d{4}$/.test(v.trim()) },
+                { id: 'province',  check: v => v !== '' },
+            ];
+            fields.forEach(({ id, check }) => {
+                const el = document.getElementById(id);
+                const err = document.getElementById(id + '-error');
+                if (!check(el.value)) { el.classList.add('error'); if (err) err.classList.add('show'); valid = false; }
+                else { el.classList.remove('error'); if (err) err.classList.remove('show'); }
+            });
+            if (!valid) { const first = document.querySelector('.form-group input.error, .form-group select.error'); if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+            return valid;
+        }
+
+        ['firstName','lastName','email','phone','address','city','postalCode','province'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', () => { el.classList.remove('error'); const err = document.getElementById(id + '-error'); if (err) err.classList.remove('show'); });
+        });
+
+        function renderReview() {
+            document.getElementById('review-items').innerHTML = cart.map(item => `
+                <div class="review-item">
+                    <img src="${item.image}" alt="${item.name}" class="review-img">
+                    <div class="review-info"><div class="review-name">${item.name}</div><div class="review-qty">Qty: ${item.quantity}</div></div>
+                    <div class="review-price">${formatPrice(item.price * item.quantity)}</div>
+                </div>`).join('');
+            document.getElementById('delivery-summary').innerHTML = `
+                <strong>📍 Delivering To</strong>
+                ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
+                ${document.getElementById('address').value}<br>
+                ${document.getElementById('city').value}, ${document.getElementById('province').value}, ${document.getElementById('postalCode').value}<br>
+                📧 ${document.getElementById('email').value}<br>
+                📱 ${document.getElementById('phone').value}`;
+        }
+
+        function selectPayment(method, el) {
+            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('card-fields').classList.toggle('show', method === 'card');
+        }
+
+        function formatCardNumber(input) {
+            let val = input.value.replace(/\D/g, '').substring(0, 16);
+            input.value = val.replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function formatExpiry(input) {
+            let val = input.value.replace(/\D/g, '').substring(0, 4);
+            if (val.length >= 2) val = val.substring(0,2) + '/' + val.substring(2);
+            input.value = val;
+        }
+
+        function placeOrder() {
+            const orderNum = 'TV-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 90000 + 10000);
+            document.getElementById('order-number').textContent = orderNum;
+            document.getElementById('confirmed-email').textContent = document.getElementById('email').value;
+            cart = [];
+            localStorage.removeItem('techvibe_cart');
+            updateCartCount();
+            document.getElementById('order-sidebar').style.display = 'none';
+            goToStep(4);
+        }
+
+        loadSidebar();
+ 
+
+
 function loadTheme() {
     const saved = localStorage.getItem('techvibe_theme');
     const icon = document.querySelector('.theme-icon');

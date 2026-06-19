@@ -26,7 +26,13 @@
         
     </nav>
 
-    <!-- Price Disclaimer Banner -->
+   
+
+        <div class="checkout-page">
+        <div class="container">
+            <h1>🔒 Secure Checkout</h1>
+
+             <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
             <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
@@ -34,6 +40,205 @@
             <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
         </div>
     </div>
+
+            <div class="checkout-steps">
+                <div class="step active" id="step-indicator-1">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Delivery</div>
+                </div>
+                <div class="step-line" id="line-1"></div>
+                <div class="step" id="step-indicator-2">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Review</div>
+                </div>
+                <div class="step-line" id="line-2"></div>
+                <div class="step" id="step-indicator-3">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step-line" id="line-3"></div>
+                <div class="step" id="step-indicator-4">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Done</div>
+                </div>
+            </div>
+
+            <div class="checkout-layout">
+                <div>
+                    <!-- STEP 1 -->
+                    <div class="step-panel active" id="panel-1">
+                        <h2>📦 Delivery Details</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" placeholder="Your Name">
+                                <div class="field-error" id="firstName-error">Required</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" placeholder="Your Last Name">
+                                <div class="field-error" id="lastName-error">Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" placeholder="you@example.com">
+                            <div class="field-error" id="email-error">Enter a valid email</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" placeholder="071 000 0000" maxlength="10">
+                            <div class="field-error" id="phone-error">Enter a 10-digit SA number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Street Address *</label>
+                            <input type="text" id="address" placeholder="123 Main Street">
+                            <div class="field-error" id="address-error">Required</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City / Town *</label>
+                                <input type="text" id="city" placeholder="Yor City">
+                                <div class="field-error" id="city-error">Required</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="postalCode">Postal Code *</label>
+                                <input type="text" id="postalCode" placeholder="2745" maxlength="4">
+                                <div class="field-error" id="postalCode-error">Enter 4-digit code</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="province">Province *</label>
+                            <select id="province">
+                                <option value="">— Select your province —</option>
+                                <option value="Eastern Cape">Eastern Cape</option>
+                                <option value="Free State">Free State</option>
+                                <option value="Gauteng">Gauteng</option>
+                                <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                <option value="Limpopo">Limpopo</option>
+                                <option value="Mpumalanga">Mpumalanga</option>
+                                <option value="Northern Cape">Northern Cape</option>
+                                <option value="North West" selected>North West</option>
+                                <option value="Western Cape">Western Cape</option>
+                            </select>
+                            <div class="field-error" id="province-error">Please select a province</div>
+                        </div>
+                        <div class="step-nav">
+                            <a href="cart.html" class="btn-back" style="text-decoration:none;text-align:center;line-height:2;">← Back to Cart</a>
+                            <button class="btn-next" onclick="goToStep(2)">Continue to Review →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div class="step-panel" id="panel-2">
+                        <h2>🧾 Review Your Order</h2>
+                        <div id="review-items"></div>
+                        <div class="delivery-details-summary" id="delivery-summary"></div>
+                        <div class="step-nav">
+                            <button class="btn-back" onclick="goToStep(1)">← Edit Details</button>
+                            <button class="btn-next" onclick="goToStep(3)">Continue to Payment →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3 -->
+                    <div class="step-panel" id="panel-3">
+                        <h2>💳 Payment Method</h2>
+                        <label class="payment-option selected" onclick="selectPayment('card', this)">
+                            <input type="radio" name="payment" value="card" checked>
+                            <div class="payment-icon">💳</div>
+                            <div>
+                                <div class="payment-label">Credit / Debit Card</div>
+                                <div class="payment-sublabel">Visa, Mastercard, Amex</div>
+                            </div>
+                        </label>
+                        <div class="card-fields show" id="card-fields">
+                            <div class="form-group">
+                                <label>Card Number</label>
+                                <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Expiry Date</label>
+                                    <input type="text" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input type="text" placeholder="123" maxlength="3">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Name on Card</label>
+                                <input type="text" placeholder="Same as in your Card">
+                            </div>
+                        </div>
+                        <label class="payment-option" onclick="selectPayment('snapscan', this)">
+                            <input type="radio" name="payment" value="snapscan">
+                            <div class="payment-icon">📱</div>
+                            <div>
+                                <div class="payment-label">SnapScan</div>
+                                <div class="payment-sublabel">Scan QR code to pay instantly</div>
+                            </div>
+                        </label>
+                        <label class="payment-option" onclick="selectPayment('eft', this)">
+                            <input type="radio" name="payment" value="eft">
+                            <div class="payment-icon">🏦</div>
+                            <div>
+                                <div class="payment-label">EFT / Bank Transfer</div>
+                                <div class="payment-sublabel">Standard Bank, FNB, Capitec, ABSA, Nedbank</div>
+                            </div>
+                        </label>
+                        <label class="payment-option" onclick="selectPayment('capitec', this)">
+                            <input type="radio" name="payment" value="capitec">
+                            <div class="payment-icon">💛</div>
+                            <div>
+                                <div class="payment-label">Capitec Pay</div>
+                                <div class="payment-sublabel">Pay securely with your Capitec account</div>
+                            </div>
+                        </label>
+                        <div class="step-nav">
+                            <button class="btn-back" onclick="goToStep(2)">← Back to Review</button>
+                            <button class="btn-next" onclick="placeOrder()">Place Order 🎉</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4 -->
+                    <div class="step-panel" id="panel-4">
+                        <div class="confirmed-panel">
+                            <div class="confirmed-icon">🎉</div>
+                            <h2>Order Confirmed!</h2>
+                            <div class="order-number" id="order-number">TV-2026-000000</div>
+                            <p>Thank you! Your order has been placed successfully.</p>
+                            <p>A confirmation will be sent to <strong id="confirmed-email">your email</strong>.</p>
+                            <div class="confirmed-steps">
+                                <div class="confirmed-step"><div class="confirmed-step-icon">✅</div><div class="confirmed-step-label">Order Confirmed</div></div>
+                                <div class="confirmed-step"><div class="confirmed-step-icon">📦</div><div class="confirmed-step-label">Being Packed</div></div>
+                                <div class="confirmed-step"><div class="confirmed-step-icon">🚚</div><div class="confirmed-step-label">Out for Delivery</div></div>
+                                <div class="confirmed-step"><div class="confirmed-step-icon">🏠</div><div class="confirmed-step-label">Delivered</div></div>
+                            </div>
+                            <p style="font-size:13px;color:#94a3b8;">Estimated delivery: <strong>3–5 business days</strong></p>
+                            <div style="margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                                <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+                                <a href="index.html" class="btn" style="background:#e2e8f0;color:#374151;">Go to Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR -->
+                <div class="order-sidebar" id="order-sidebar">
+                    <h3>🛒 Order Summary</h3>
+                    <div id="sidebar-items"></div>
+                    <div class="sidebar-divider"></div>
+                    <div class="sidebar-item"><span>Subtotal</span><span id="sidebar-subtotal">R 0,00</span></div>
+                    <div class="sidebar-item"><span>Delivery</span><span id="sidebar-delivery">R 99,00</span></div>
+                    <div class="sidebar-divider"></div>
+                    <div class="sidebar-total"><span>Total</span><span id="sidebar-total">R 0,00</span></div>
+                    <div class="secure-badge">🔒 SSL Secured Checkout</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
     <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
