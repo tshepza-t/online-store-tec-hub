@@ -79,6 +79,22 @@ const products = [
         image: "https://th.bing.com/th/id/OIP.Ervqbp_ZoxafMavf6n_WfAHaHa?w=105&h=108&c=7&qlt=90&bgcl=c02651&r=0&o=6&dpr=1.3&pid=13.1",
         description: "The ultimate Samsung experience — S Pen, AI camera, and pro-grade performance"
     },
+    {
+        id: 11,
+        name: "HP Spectre x360 14 (2026 Edition) ",
+        price: 55000,
+        category: "laptops",
+        image: "https://www.bing.com/th?id=OPEC.JkkMjm6O5GCsnA474C474&o=5&pid=21.1&w=140&h=140&qlt=100&dpr=1,3&o=2",
+        description: "Adaptive 2-in-1 laptop with built in AI technology"
+    },
+    {
+        id: 11,
+        name: "Galaxy Buds4 ",
+        price: 3499,
+        category: "accessories",
+        image: "https://images.samsung.com/is/image/samsung/p6pim/za/s2602/gallery/za-galaxy-buds4-r540-sm-r540nzwaxfa-thumb-550984777?$Q90_330_330_F_PNG$",
+        description: "Paradise in your ears with built in AI technology"
+    },
 ];
 
 // Shopping cart array
@@ -131,7 +147,7 @@ function displayFeaturedProducts() {
     if (!featuredContainer) return; // not on home page, do nothing
 
     //New Arrivals Products
-    const newArrivals = products.filter(p => [8 ,10].includes(p.id));   
+    const newArrivals = products.filter(p => [8, 10, 11 ].includes(p.id));   
 
     console.log('Displaying featured products on home page');
     //const featured = products.slice(0, 4);
