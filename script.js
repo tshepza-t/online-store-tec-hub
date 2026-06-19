@@ -95,6 +95,30 @@ const products = [
         image: "https://images.samsung.com/is/image/samsung/p6pim/za/s2602/gallery/za-galaxy-buds4-r540-sm-r540nzwaxfa-thumb-550984777?$Q90_330_330_F_PNG$",
         description: "Paradise in your ears with built in AI technology"
     },
+    {
+        id: 12,
+        name: "Sony WH-CH720 Wireless Noise Cancelling White Headphones ",
+        price: 2699,
+        category: "accessories",
+        image: "https://thefoschini.vtexassets.com/arquivos/ids/222978508-1200-1600?v=639015738519300000&width=1200&height=1600&aspect=true",
+        description: "Dual Noise Sensor technology + Integrated Processor V1 deliver stronger, more effective noise cancelling so you can stay immersed in your music anywhere."
+    },
+    {
+        id: 13,
+        name: "Apple Watch Series 11 ",
+        price: 11000,
+        category: "accessories",
+        image: "https://thefoschini.vtexassets.com/arquivos/ids/220659820-1200-1600?v=638938586668200000&width=1200&height=1600&aspect=true",
+        description: "GPS 46mm Aluminium Case with Sport Band, Battery up to 24 hours of normal use and High and low heart rate notifications"
+    },
+    {
+        id: 14,
+        name: "Galaxy Watch Ultra (2026) ",
+        price: 15000,
+        category: "accessories",
+        image: "https://images.samsung.com/is/image/samsung/p6pim/za/f2507/gallery/za-galaxy-watch-ultra-2025-l705-sm-l705fzb1xfa-547647313?$1164_776_PNG$",
+        description: "Galaxy Watch Ultra withstands up to 55 °C heat, 9,000 m altitude, 10 ATM water pressure and runs smoothly through it all with a new, powerful 3 nm processor and Now available in Titanium Blue"
+    },
 ];
 
 // Shopping cart array
@@ -147,7 +171,7 @@ function displayFeaturedProducts() {
     if (!featuredContainer) return; // not on home page, do nothing
 
     //New Arrivals Products
-    const newArrivals = products.filter(p => [8, 10, 11 ].includes(p.id));   
+    const newArrivals = products.filter(p => [8, 10, 11, 12, 13, 14 ].includes(p.id));   
 
     console.log('Displaying featured products on home page');
     //const featured = products.slice(0, 4);
