@@ -52,6 +52,25 @@
             <div class="products-grid" id="featured-products">
                 <!----Products will come frpm JavaScrip here---->
             </div>
+
+            <div class="carousel-wrapper">
+            <!-- Left Arrow -->
+            <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">&#8592;</button>
+
+            <!-- Sliding Track -->
+            <div class="carousel-track-container">
+                <div class="carousel-track" id="carousel-track">
+                    <!-- Products injected by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Right Arrow -->
+            <button class="carousel-btn next-btn" onclick="moveCarousel(1)">&#8594;</button>
+        </div>
+
+        <!-- Dots navigation -->
+        <div class="carousel-dots" id="carousel-dots"></div>
+
         </div>
     </section>
 

@@ -366,3 +366,136 @@ body.dark-mode .hero {
     0%   { transform: translateX(-50%); }
     100% { transform: translateX(0); }
 }
+
+/* ── CAROUSEL ────────────────────────────── */
+.featured h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 8px;
+    color: #1e293b;
+}
+
+.featured h2::after {
+    content: 'Just landed in store';
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: #3b82f6;
+    margin-top: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    flex: 1;
+    border-radius: 12px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 24px;
+}
+
+.carousel-track .product-card {
+    min-width: calc(33.333% - 16px);
+    flex-shrink: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-track .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+}
+
+/* Arrow buttons */
+.carousel-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+}
+
+.carousel-btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.1);
+}
+
+.carousel-btn:disabled {
+    background: #cbd5e1;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.carousel-dot.active {
+    background: #3b82f6;
+    width: 28px;
+    border-radius: 5px;
+}
+
+/* Dark mode carousel */
+body.dark-mode .carousel-track .product-card {
+    background: #1c1c27;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+body.dark-mode .carousel-btn:disabled {
+    background: #2a2a3a;
+}
+
+/* Mobile — show 1 card at a time */
+@media (max-width: 768px) {
+    .carousel-track .product-card {
+        min-width: 100%;
+    }
+}
+
+/* Tablet — show 2 cards */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .carousel-track .product-card {
+        min-width: calc(50% - 12px);
+    }
+}

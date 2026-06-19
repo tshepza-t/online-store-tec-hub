@@ -49,7 +49,7 @@ const products = [
     },
     {
         id: 7,
-        name: "iPhone 16 ",
+        name: "iPhone 16",
         price: 16999,
         category: "phones",
         image: "https://www.bing.com/th?id=OPEC.E3iJzbF5Hg6aRw474C474&o=5&pid=21.1&w=128&h=168&qlt=100&dpr=1,3&o=2&bw=6&bc=FFFFFF",
@@ -57,7 +57,7 @@ const products = [
     },
     {
         id: 8,
-        name: "iPhone 17 Pro Max ",
+        name: "iPhone 17 Pro Max",
         price: 30499,
         category: "phones",
         image: "https://www.bing.com/th?id=OPEC.yb6%2f2xLts4o6zQ474C474&o=5&pid=21.1&w=128&h=168&qlt=100&dpr=1,3&o=2&bw=6&bc=FFFFFF",
@@ -65,7 +65,7 @@ const products = [
     },
     {
         id: 9,
-        name: "Samsung S25 Plus ",
+        name: "Samsung S25 Plus",
         price: 20499,
         category: "phones",
         image: "https://www.bing.com/th/id/OIP.AbVpNo9snSdb2gWIvassswHaD4?w=312&h=200&c=8&rs=1&o=6&dpr=1.3&pid=3.1&rm=2",
@@ -73,7 +73,7 @@ const products = [
     },
     {
         id: 10,
-        name: "Samsung S26 Ultra ",
+        name: "Samsung S26 Ultra",
         price: 40000,
         category: "phones",
         image: "https://th.bing.com/th/id/OIP.Ervqbp_ZoxafMavf6n_WfAHaHa?w=105&h=108&c=7&qlt=90&bgcl=c02651&r=0&o=6&dpr=1.3&pid=13.1",
@@ -81,43 +81,43 @@ const products = [
     },
     {
         id: 11,
-        name: "HP Spectre x360 14 (2026 Edition) ",
+        name: "HP Spectre x360 14 (2026 Edition)",
         price: 55000,
         category: "laptops",
         image: "https://www.bing.com/th?id=OPEC.JkkMjm6O5GCsnA474C474&o=5&pid=21.1&w=140&h=140&qlt=100&dpr=1,3&o=2",
         description: "Adaptive 2-in-1 laptop with built in AI technology"
     },
     {
-        id: 11,
-        name: "Galaxy Buds4 ",
+        id: 12,
+        name: "Galaxy Buds4",
         price: 3499,
         category: "accessories",
         image: "https://images.samsung.com/is/image/samsung/p6pim/za/s2602/gallery/za-galaxy-buds4-r540-sm-r540nzwaxfa-thumb-550984777?$Q90_330_330_F_PNG$",
         description: "Paradise in your ears with built in AI technology"
     },
     {
-        id: 12,
-        name: "Sony WH-CH720 Wireless Noise Cancelling White Headphones ",
+        id: 13,
+        name: "Sony WH-CH720 Wireless Noise Cancelling Headphones",
         price: 2699,
         category: "accessories",
         image: "https://thefoschini.vtexassets.com/arquivos/ids/222978508-1200-1600?v=639015738519300000&width=1200&height=1600&aspect=true",
-        description: "Dual Noise Sensor technology + Integrated Processor V1 deliver stronger, more effective noise cancelling so you can stay immersed in your music anywhere."
-    },
-    {
-        id: 13,
-        name: "Apple Watch Series 11 ",
-        price: 11000,
-        category: "accessories",
-        image: "https://thefoschini.vtexassets.com/arquivos/ids/220659820-1200-1600?v=638938586668200000&width=1200&height=1600&aspect=true",
-        description: "GPS 46mm Aluminium Case with Sport Band, Battery up to 24 hours of normal use and High and low heart rate notifications"
+        description: "Dual Noise Sensor technology delivers stronger, more effective noise cancelling so you can stay immersed in your music anywhere."
     },
     {
         id: 14,
-        name: "Galaxy Watch Ultra (2026) ",
+        name: "Apple Watch Series 11",
+        price: 11000,
+        category: "accessories",
+        image: "https://thefoschini.vtexassets.com/arquivos/ids/220659820-1200-1600?v=638938586668200000&width=1200&height=1600&aspect=true",
+        description: "GPS 46mm Aluminium Case with Sport Band, up to 24 hours battery and heart rate notifications"
+    },
+    {
+        id: 15,
+        name: "Galaxy Watch Ultra (2026)",
         price: 15000,
         category: "accessories",
         image: "https://images.samsung.com/is/image/samsung/p6pim/za/f2507/gallery/za-galaxy-watch-ultra-2025-l705-sm-l705fzb1xfa-547647313?$1164_776_PNG$",
-        description: "Galaxy Watch Ultra withstands up to 55 °C heat, 9,000 m altitude, 10 ATM water pressure and runs smoothly through it all with a new, powerful 3 nm processor and Now available in Titanium Blue"
+        description: "Withstands 55°C heat, 9,000m altitude, 10 ATM water pressure with a powerful 3nm processor. Now in Titanium Blue."
     },
 ];
 
@@ -160,26 +160,117 @@ function createProductCard(product) {
 
 // ── PRODUCTS PAGE — show all / filtered products ─────────────
 function displayProducts(productsToShow = products) {
-    if (!productsGrid) return; // not on products page, do nothing
+    if (!productsGrid) return;
     console.log('Displaying', productsToShow.length, 'products on products page');
     productsGrid.innerHTML = productsToShow.map(createProductCard).join('');
 }
 
-// ── HOME PAGE — show first 4 as featured ────────────────────
-function displayFeaturedProducts() {
-    const featuredContainer = document.getElementById('featured-products');
-    if (!featuredContainer) return; // not on home page, do nothing
+// ── CAROUSEL VARIABLES ───────────────────────────────────────
+let carouselIndex = 0;
+let carouselItems = [];
+let autoSlideInterval = null;
 
-    //New Arrivals Products
-    const newArrivals = products.filter(p => [8, 10, 11, 12, 13, 14 ].includes(p.id));   
-
-    console.log('Displaying featured products on home page');
-    //const featured = products.slice(0, 4);
-    featuredContainer.innerHTML = newArrivals.map(createProductCard).join('');
-     console.log('Displaying', newArrivals.length, 'new arrivals on home page');
+function getCardsVisible() {
+    if (window.innerWidth <= 768) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 3;
 }
 
-// ── CART ────────────────────────────────────────────────────
+// ── HOME PAGE — New Arrivals Carousel ───────────────────────
+function displayFeaturedProducts() {
+    const track = document.getElementById('carousel-track');
+    const dotsContainer = document.getElementById('carousel-dots');
+    if (!track) return; // not on home page, do nothing
+
+    // ✅ Update these IDs whenever you add new products
+    carouselItems = products.filter(p => [8, 10, 11, 12, 13, 14, 15].includes(p.id));
+
+    const cardsVisible = getCardsVisible();
+
+    // Render cards into the track
+    track.innerHTML = carouselItems.map(createProductCard).join('');
+
+    // Render dot indicators
+    const totalDots = Math.max(carouselItems.length - cardsVisible + 1, 1);
+    if (dotsContainer) {
+        dotsContainer.innerHTML = Array.from({ length: totalDots }, (_, i) => `
+            <button class="carousel-dot ${i === 0 ? 'active' : ''}"
+                    onclick="goToSlide(${i})">
+            </button>
+        `).join('');
+    }
+
+    // Start auto sliding
+    startAutoSlide();
+
+    // Pause when user hovers
+    const wrapper = document.querySelector('.carousel-wrapper');
+    if (wrapper) {
+        wrapper.addEventListener('mouseenter', stopAutoSlide);
+        wrapper.addEventListener('mouseleave', startAutoSlide);
+    }
+
+    console.log('Displaying', carouselItems.length, 'new arrivals in carousel');
+}
+
+function moveCarousel(direction) {
+    const cardsVisible = getCardsVisible();
+    const maxIndex = Math.max(carouselItems.length - cardsVisible, 0);
+
+    carouselIndex += direction;
+
+    // Loop around smoothly
+    if (carouselIndex < 0) carouselIndex = maxIndex;
+    if (carouselIndex > maxIndex) carouselIndex = 0;
+
+    updateCarousel();
+}
+
+function goToSlide(index) {
+    carouselIndex = index;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const track = document.getElementById('carousel-track');
+    const dots = document.querySelectorAll('.carousel-dot');
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.product-card');
+    if (!cards.length) return;
+
+    // Card width + gap (24px gap from CSS)
+    const cardWidth = cards[0].offsetWidth + 24;
+    track.style.transform = `translateX(-${carouselIndex * cardWidth}px)`;
+
+    // Update active dot
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === carouselIndex);
+    });
+}
+
+function startAutoSlide() {
+    stopAutoSlide();
+    autoSlideInterval = setInterval(() => {
+        moveCarousel(1);
+    }, 3000); // every 3 seconds
+}
+
+function stopAutoSlide() {
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+    }
+}
+
+// Recalculate on screen resize
+window.addEventListener('resize', () => {
+    carouselIndex = 0;
+    updateCarousel();
+    displayFeaturedProducts();
+});
+
+// ── CART ─────────────────────────────────────────────────────
 function updateCartCount() {
     const cartCountEl = document.getElementById('cart-count');
     if (cartCountEl) {
@@ -198,10 +289,8 @@ function addToCart(productId) {
         cart.push({ ...product, quantity: 1 });
     }
 
-    // Save to localStorage so cart persists on refresh
     localStorage.setItem('techvibe_cart', JSON.stringify(cart));
     updateCartCount();
-
     console.log('Cart updated:', cart);
     alert(`✅ ${product.name} added to cart!`);
 }
@@ -217,13 +306,12 @@ function viewProduct(productId) {
     );
 }
 
-// ── CART PAGE — render cart items ───────────────────────────
+// ── CART PAGE ────────────────────────────────────────────────
 function displayCart() {
     const cartContainer = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
-    if (!cartContainer) return; // not on cart page, do nothing
+    if (!cartContainer) return;
 
-    // Load cart from localStorage
     const saved = localStorage.getItem('techvibe_cart');
     if (saved) cart = JSON.parse(saved);
 
@@ -232,9 +320,9 @@ function displayCart() {
             <div style="text-align:center; padding: 60px 20px;">
                 <h2>🛒 Your cart is empty</h2>
                 <p style="color:#666; margin: 12px 0 24px;">Looks like you haven't added anything yet.</p>
-                <a href="/products" class="btn btn-primary">Browse Products</a>
+                <a href="products.html" class="btn btn-primary">Browse Products</a>
             </div>`;
-        if (cartTotal) cartTotal.textContent = 'Total: R 0.00';
+        if (cartTotal) cartTotal.textContent = 'Total: R 0,00';
         return;
     }
 
@@ -279,7 +367,7 @@ function removeFromCart(productId) {
     updateCartCount();
 }
 
-// ── FILTER BUTTONS (products page) ──────────────────────────
+// ── FILTER BUTTONS ───────────────────────────────────────────
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
@@ -296,7 +384,7 @@ function setupFilters() {
     });
 }
 
-// ── LOAD CART COUNT ON EVERY PAGE ───────────────────────────
+// ── LOAD CART COUNT ON EVERY PAGE ────────────────────────────
 function loadCartFromStorage() {
     const saved = localStorage.getItem('techvibe_cart');
     if (saved) {
@@ -305,7 +393,7 @@ function loadCartFromStorage() {
     }
 }
 
-// ── DARK MODE — OUTSIDE everything so button can reach it ───
+// ── DARK MODE ────────────────────────────────────────────────
 function toggleTheme() {
     const body = document.body;
     const icon = document.querySelector('.theme-icon');
@@ -333,14 +421,14 @@ function loadTheme() {
     }
 }
 
-// ── INIT — runs when page is ready ──────────────────────────
+// ── INIT ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Page loaded — initialising TechVibe...');
 
     loadCartFromStorage();
     displayProducts();
-    displayFeaturedProducts();
+    displayFeaturedProducts();  // now builds the carousel
     displayCart();
     setupFilters();
-    loadTheme();        // ✅ called here after DOM is ready
+    loadTheme();
 });
