@@ -2,7 +2,7 @@ const products = [
     {
         id: 1,
         name: "iPhone 15 Pro",
-        price: 999,
+        price: 22999,
         category: "phones",
         image: "https://th.bing.com/th/id/R.e620582844f3c7ab51b35dcad732c912?rik=kMrVu3dF5D4pww&riu=http%3a%2f%2fdigitek.cl%2fcdn%2fshop%2ffiles%2fpbi-iphone-15-pro-max-1447353134.png%3fcrop%3dcenter%26height%3d1200%26v%3d1700683132%26width%3d1200&ehk=Q7zdDKL5XVV1%2f1EQfIYKXvunJC%2bmDHCERBRhZGPUVXI%3d&risl=&pid=ImgRaw&r=0",
         description: "The latest iPhone with amazing camera and performance"
@@ -10,7 +10,7 @@ const products = [
     {
         id: 2,
         name: "MacBook Air 2022",
-        price: 1199,
+        price: 28999,
         category: "laptops",
         image: "https://th.bing.com/th/id/OIP.9pM1kxhssgN-nG6u5fj-xAHaFj?w=251&h=187&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
         description: "Lightweight laptop perfect for work and creativity"
@@ -18,7 +18,7 @@ const products = [
     {
         id: 3,
         name: "AirPods Pro",
-        price: 249,
+        price: 5999,
         category: "accessories",
         image: "https://th.bing.com/th/id/OIP.134VJ44OStJo8DrF8-JnyAHaHa?r=0&rs=1&pid=ImgDetMain",
         description: "Wireless earbuds with noise cancellation"
@@ -26,7 +26,7 @@ const products = [
     {
         id: 4,
         name: "Samsung Galaxy S24",
-        price: 899,
+        price: 18999,
         category: "phones",
         image: "https://th.bing.com/th/id/OIP.5pLTDO9E_LSYCTAAK3C64wHaHa?w=168&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
         description: "Android phone with incredible features"
@@ -34,7 +34,7 @@ const products = [
     {
         id: 5,
         name: "Dell Laptop",
-        price: 799,
+        price: 12999,
         category: "laptops",
         image: "https://tech.co.za/wp-content/uploads/2023/06/Inspiron-3520a.png",
         description: "Reliable laptop for everyday computing"
@@ -42,7 +42,7 @@ const products = [
     {
         id: 6,
         name: "Wireless Mouse",
-        price: 49,
+        price: 599,
         category: "accessories",
         image: "https://th.bing.com/th/id/OIP.cJbtKKZbERFQBr5-_ftO7gHaHa?r=0&rs=1&pid=ImgDetMain",
         description: "Ergonomic wireless mouse for productivity"
@@ -50,7 +50,7 @@ const products = [
     {
         id: 7,
         name: "iPhone 16 ",
-        price: 2900,
+        price: 16999,
         category: "phones",
         image: "https://www.bing.com/th?id=OPEC.E3iJzbF5Hg6aRw474C474&o=5&pid=21.1&w=128&h=168&qlt=100&dpr=1,3&o=2&bw=6&bc=FFFFFF",
         description: "The latest iPhone with amazing camera and performance"
@@ -58,7 +58,7 @@ const products = [
     {
         id: 8,
         name: "iPhone 17 Pro Max ",
-        price: 5400,
+        price: 30499,
         category: "phones",
         image: "https://www.bing.com/th?id=OPEC.yb6%2f2xLts4o6zQ474C474&o=5&pid=21.1&w=128&h=168&qlt=100&dpr=1,3&o=2&bw=6&bc=FFFFFF",
         description: "The latest iPhone with amazing camera and performance"
@@ -66,18 +66,18 @@ const products = [
     {
         id: 9,
         name: "Samsung S25 Plus ",
-        price: 5100,
+        price: 20499,
         category: "phones",
         image: "https://www.bing.com/th/id/OIP.AbVpNo9snSdb2gWIvassswHaD4?w=312&h=200&c=8&rs=1&o=6&dpr=1.3&pid=3.1&rm=2",
-        description: "The latest iPhone with amazing camera and performance"
+        description: "Samsung's latest flagship with stunning display and powerful battery"
     },
     {
         id: 10,
         name: "Samsung S26 Ultra ",
-        price: 6000,
+        price: 40000,
         category: "phones",
         image: "https://th.bing.com/th/id/OIP.Ervqbp_ZoxafMavf6n_WfAHaHa?w=105&h=108&c=7&qlt=90&bgcl=c02651&r=0&o=6&dpr=1.3&pid=13.1",
-        description: "The latest iPhone with amazing camera and performance"
+        description: "The ultimate Samsung experience — S Pen, AI camera, and pro-grade performance"
     },
 ];
 
@@ -129,9 +129,14 @@ function displayProducts(productsToShow = products) {
 function displayFeaturedProducts() {
     const featuredContainer = document.getElementById('featured-products');
     if (!featuredContainer) return; // not on home page, do nothing
+
+    //New Arrivals Products
+    const newArrivals = products.filter(p => [8 ,10].includes(p.id));   
+
     console.log('Displaying featured products on home page');
-    const featured = products.slice(0, 4);
-    featuredContainer.innerHTML = featured.map(createProductCard).join('');
+    //const featured = products.slice(0, 4);
+    featuredContainer.innerHTML = newArrivals.map(createProductCard).join('');
+     console.log('Displaying', newArrivals.length, 'new arrivals on home page');
 }
 
 // ── CART ────────────────────────────────────────────────────

@@ -187,6 +187,18 @@ body.dark-mode .hero {
     color: #1e293b;
 }
 
+/* New Arrivals badge line under the heading */
+.featured h2::after {
+    content: 'Just landed in store';
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    color: #3b82f6;
+    margin-top: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
