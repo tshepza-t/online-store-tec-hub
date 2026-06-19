@@ -6,7 +6,7 @@ const products = [
         price: 22999,
         category: "phones",
         image: "https://th.bing.com/th/id/R.e620582844f3c7ab51b35dcad732c912?rik=kMrVu3dF5D4pww&riu=http%3a%2f%2fdigitek.cl%2fcdn%2fshop%2ffiles%2fpbi-iphone-15-pro-max-1447353134.png%3fcrop%3dcenter%26height%3d1200%26v%3d1700683132%26width%3d1200&ehk=Q7zdDKL5XVV1%2f1EQfIYKXvunJC%2bmDHCERBRhZGPUVXI%3d&risl=&pid=ImgRaw&r=0",
-        description: "A17 Pro chip, titanium build, and a pro camera system that raises the bar."
+        description: "A15 Pro chip, titanium build, and a pro camera system that raises the bar."
     },
     {
         id: 2,
@@ -58,7 +58,7 @@ const products = [
     },
     {
         id: 8,
-        name: "iPhone 16 Pro Max",
+        name: "iPhone 17 Pro Max",
         price: 30499,
         category: "phones",
         image: "https://www.bing.com/th?id=OPEC.yb6%2f2xLts4o6zQ474C474&o=5&pid=21.1&w=128&h=168&qlt=100&dpr=1,3&o=2&bw=6&bc=FFFFFF",
@@ -74,7 +74,7 @@ const products = [
     },
     {
         id: 10,
-        name: "Samsung S25 Ultra",
+        name: "Samsung S26 Ultra",
         price: 40000,
         category: "phones",
         image: "https://th.bing.com/th/id/OIP.Ervqbp_ZoxafMavf6n_WfAHaHa?w=105&h=108&c=7&qlt=90&bgcl=c02651&r=0&o=6&dpr=1.3&pid=13.1",

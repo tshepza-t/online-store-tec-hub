@@ -267,7 +267,7 @@ body.dark-mode .nav-menu a {
     overflow: hidden;
     white-space: nowrap;
     border-top: 2px solid #0056b3;
-    border-bottom: 2px solid #0056b3;
+    border-bottom: 4px solid #0056b3;
     margin-bottom: 0;
 }
 
