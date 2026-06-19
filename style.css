@@ -474,7 +474,7 @@ body.dark-mode .carousel-track .product-card {
 .filters {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
     margin-bottom: 40px;
     flex-wrap: wrap;
 }
