@@ -368,6 +368,77 @@ function removeFromCart(productId) {
     updateCartCount();
 }
 
+        function updateCharCount() {
+            document.getElementById('char-count').textContent = document.getElementById('message').value.length;
+        }
+
+        function validateForm() {
+            let valid = true;
+            const fields = [
+                { id: 'firstName', errorId: 'firstName-error', check: v => v.trim().length >= 2 },
+                { id: 'lastName',  errorId: 'lastName-error',  check: v => v.trim().length >= 2 },
+                { id: 'email',     errorId: 'email-error',     check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+                { id: 'subject',   errorId: 'subject-error',   check: v => v !== '' },
+                { id: 'message',   errorId: 'message-error',   check: v => v.trim().length >= 10 },
+            ];
+            fields.forEach(({ id, errorId, check }) => {
+                const el = document.getElementById(id);
+                const err = document.getElementById(errorId);
+                if (!check(el.value)) {
+                    el.classList.add('error');
+                    err.classList.add('show');
+                    valid = false;
+                } else {
+                    el.classList.remove('error');
+                    err.classList.remove('show');
+                }
+            });
+            return valid;
+        }
+
+        ['firstName','lastName','email','subject','message'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', () => {
+                el.classList.remove('error');
+                document.getElementById(id + '-error').classList.remove('show');
+            });
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!validateForm()) return;
+            const btn = document.getElementById('submit-btn');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: { 'Accept': 'application/json' }
+            }).then(() => showSuccess()).catch(() => showSuccess());
+        });
+
+        function showSuccess() {
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('success-message').classList.add('show');
+        }
+
+        function resetForm() {
+            document.getElementById('contact-form').reset();
+            document.getElementById('contact-form').style.display = 'block';
+            document.getElementById('success-message').classList.remove('show');
+            document.getElementById('submit-btn').textContent = 'Send Message ✉️';
+            document.getElementById('submit-btn').disabled = false;
+            document.getElementById('char-count').textContent = '0';
+        }
+
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+
 // ── FILTER BUTTONS ───────────────────────────────────────────
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');

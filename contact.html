@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVibe-Home</title>
+    <title>TechVibe-Contact</title>
 
     <link rel="stylesheet" href="style.css" >
 </head>
@@ -26,16 +26,6 @@
         
     </nav>
 
-    
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to TechVibe!</h1>
-            <p>Find the best South Africa's Electronics go-to store in the plam of your hand!
-                at an amazing price that makes sense to your pockets.</p>
-            <a href="products.html" class="btn">Shop Now!</a>
-        </div>
-    </section>
-
     <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
@@ -44,6 +34,142 @@
             <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
         </div>
     </div>
+
+    <div class="contact-page">
+        <div class="container">
+            <div class="contact-hero">
+                <h1>📬 Get In Touch</h1>
+                <p>Have a question about an order or product? We're here to help — reach out and we'll respond within ( 24 - 48) working hours.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-form-card">
+                    <h2>Send Us a Message</h2>
+                    <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Your Name">
+                                <div class="field-error" id="firstName-error">Please enter your first name</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Your Last Name">
+                                <div class="field-error" id="lastName-error">Please enter your last name</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com">
+                            <div class="field-error" id="email-error">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number (optional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="012 894 8853" maxlength="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject">
+                                <option value="">— Select a topic —</option>
+                                <option value="General Enquiry">General Enquiry</option>
+                                <option value="Order Issue">Order Issue</option>
+                                <option value="Product Question">Product Question</option>
+                                <option value="Returns & Refunds">Returns & Refunds</option>
+                                <option value="Delivery Query">Delivery Query</option>
+                                <option value="Technical Support">Technical Support</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="field-error" id="subject-error">Please select a subject</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" placeholder="Tell us how we can help you..." maxlength="500" oninput="updateCharCount()"></textarea>
+                            <div class="char-count"><span id="char-count">0</span>/500 characters</div>
+                            <div class="field-error" id="message-error">Please enter a message (at least 10 characters)</div>
+                        </div>
+                        <button type="submit" class="submit-btn" id="submit-btn">Send Message ✉️</button>
+                    </form>
+                    <div class="success-message" id="success-message">
+                        <div class="success-icon">✅</div>
+                        <h3>Message Sent!</h3>
+                        <p>Thanks for reaching out. We'll get back to you within working hours (24 - 48).</p>
+                        <button class="btn btn-primary" onclick="resetForm()">Send Another Message</button>
+                    </div>
+                </div>
+                <div class="contact-info-card">
+                    <h3>Contact Information</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div>
+                            <div class="info-text-label">Location</div>
+                            <div class="info-text-value">North West, South Africa</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div>
+                            <div class="info-text-label">Email</div>
+                            <div class="info-text-value">support@techvibe.co.za</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div>
+                            <div class="info-text-label">Business Hours</div>
+                            <div class="info-text-value">Mon – Fri: 08:00 – 17:00 SAST</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🚚</div>
+                        <div>
+                            <div class="info-text-label">Delivery</div>
+                            <div class="info-text-value">Nationwide across all 9 provinces</div>
+                        </div>
+                    </div>
+                    <div class="response-banner">
+                        ⚡ Average response time: <strong style="color:white;margin-left:4px;">within 24 hours</strong>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/tshepang-taele-850b952b1" target="_blank" class="social-link" title="LinkedIn">💼</a>
+                        <a href="https://github.com/tshepza-t" target="_blank" class="social-link" title="GitHub">🐙</a>
+                        <a href="mailto:support@techvibe.co.za" class="social-link" title="Email">📧</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>❓ Frequently Asked Questions</h2>
+                <p class="faq-subtitle">Quick answers to the most common questions</p>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">How long does delivery take?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">Standard delivery takes 3–5 business days to major cities. Remote areas may take 5–7 business days.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">Can I return a product?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">Yes. You can return any product within 7 days of delivery, unused and in original packaging with proof of purchase.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">Do you deliver nationwide?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">Yes — we deliver to all 9 South African provinces including Gauteng, Western Cape, KwaZulu-Natal, North West, and more.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">How do I track my order?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">After placing your order you will receive a confirmation email with your order number and a tracking link.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">Are the products genuine?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">All products sold on TechVibe are genuine. Prices are TechVibe store prices and may differ from official manufacturer pricing.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">What payment methods do you accept?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">We accept Credit/Debit Cards, EFT/Bank Transfer, SnapScan, and Capitec Pay. All transactions are secured.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     <!-- Price Disclaimer Banner -->
