@@ -127,7 +127,6 @@ let cart = [];
 // HTML element references
 const cartCountElement = document.getElementById('cart-count');
 const productsGrid = document.getElementById('products-grid');
-const featuredProducts = document.getElementById('featured-products');
 
 // Format price as Rands
 function formatPrice(price) {
@@ -158,14 +157,14 @@ function createProductCard(product) {
         </div>`;
 }
 
-// ── PRODUCTS PAGE — show all / filtered products ─────────────
+// ── PRODUCTS PAGE ─────────────────────────────────────────────
 function displayProducts(productsToShow = products) {
     if (!productsGrid) return;
     console.log('Displaying', productsToShow.length, 'products on products page');
     productsGrid.innerHTML = productsToShow.map(createProductCard).join('');
 }
 
-// ── CAROUSEL VARIABLES ───────────────────────────────────────
+// ── CAROUSEL VARIABLES ────────────────────────────────────────
 let carouselIndex = 0;
 let carouselItems = [];
 let autoSlideInterval = null;
@@ -176,34 +175,25 @@ function getCardsVisible() {
     return 3;
 }
 
-// ── HOME PAGE — New Arrivals Carousel ───────────────────────
+// ── HOME PAGE — New Arrivals Carousel ─────────────────────────
 function displayFeaturedProducts() {
     const track = document.getElementById('carousel-track');
     const dotsContainer = document.getElementById('carousel-dots');
-    if (!track) return; // not on home page, do nothing
+    if (!track) return;
 
-    // ✅ Update these IDs whenever you add new products
     carouselItems = products.filter(p => [8, 10, 11, 12, 14, 15].includes(p.id));
-
     const cardsVisible = getCardsVisible();
-
-    // Render cards into the track
     track.innerHTML = carouselItems.map(createProductCard).join('');
 
-    // Render dot indicators
     const totalDots = Math.max(carouselItems.length - cardsVisible + 1, 1);
     if (dotsContainer) {
         dotsContainer.innerHTML = Array.from({ length: totalDots }, (_, i) => `
-            <button class="carousel-dot ${i === 0 ? 'active' : ''}"
-                    onclick="goToSlide(${i})">
-            </button>
+            <button class="carousel-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></button>
         `).join('');
     }
 
-    // Start auto sliding
     startAutoSlide();
 
-    // Pause when user hovers
     const wrapper = document.querySelector('.carousel-wrapper');
     if (wrapper) {
         wrapper.addEventListener('mouseenter', stopAutoSlide);
@@ -216,13 +206,9 @@ function displayFeaturedProducts() {
 function moveCarousel(direction) {
     const cardsVisible = getCardsVisible();
     const maxIndex = Math.max(carouselItems.length - cardsVisible, 0);
-
     carouselIndex += direction;
-
-    // Loop around smoothly
     if (carouselIndex < 0) carouselIndex = maxIndex;
     if (carouselIndex > maxIndex) carouselIndex = 0;
-
     updateCarousel();
 }
 
@@ -235,25 +221,16 @@ function updateCarousel() {
     const track = document.getElementById('carousel-track');
     const dots = document.querySelectorAll('.carousel-dot');
     if (!track) return;
-
     const cards = track.querySelectorAll('.product-card');
     if (!cards.length) return;
-
-    // Card width + gap (24px gap from CSS)
     const cardWidth = cards[0].offsetWidth + 24;
     track.style.transform = `translateX(-${carouselIndex * cardWidth}px)`;
-
-    // Update active dot
-    dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === carouselIndex);
-    });
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === carouselIndex));
 }
 
 function startAutoSlide() {
     stopAutoSlide();
-    autoSlideInterval = setInterval(() => {
-        moveCarousel(1);
-    }, 3000); // every 3 seconds
+    autoSlideInterval = setInterval(() => moveCarousel(1), 3000);
 }
 
 function stopAutoSlide() {
@@ -263,14 +240,13 @@ function stopAutoSlide() {
     }
 }
 
-// Recalculate on screen resize
 window.addEventListener('resize', () => {
     carouselIndex = 0;
     updateCarousel();
     displayFeaturedProducts();
 });
 
-// ── CART ─────────────────────────────────────────────────────
+// ── CART ──────────────────────────────────────────────────────
 function updateCartCount() {
     const cartCountEl = document.getElementById('cart-count');
     if (cartCountEl) {
@@ -281,18 +257,16 @@ function updateCartCount() {
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
-
     const existing = cart.find(item => item.id === productId);
     if (existing) {
         existing.quantity += 1;
     } else {
         cart.push({ ...product, quantity: 1 });
     }
-
     localStorage.setItem('techvibe_cart', JSON.stringify(cart));
     updateCartCount();
     console.log('Cart updated:', cart);
-    alert(`✅ ${product.name} added to cart!`);
+    alert('✅ ' + product.name + ' added to cart!');
 }
 
 function viewProduct(productId) {
@@ -306,15 +280,13 @@ function viewProduct(productId) {
     );
 }
 
-// ── CART PAGE ────────────────────────────────────────────────
+// ── CART PAGE ─────────────────────────────────────────────────
 function displayCart() {
     const cartContainer = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
     if (!cartContainer) return;
-
     const saved = localStorage.getItem('techvibe_cart');
     if (saved) cart = JSON.parse(saved);
-
     if (cart.length === 0) {
         cartContainer.innerHTML = `
             <div style="text-align:center; padding: 60px 20px;">
@@ -325,7 +297,6 @@ function displayCart() {
         if (cartTotal) cartTotal.textContent = 'Total: R 0,00';
         return;
     }
-
     cartContainer.innerHTML = cart.map(item => `
         <div class="cart-item" style="display:flex; align-items:center; gap:16px; padding:16px; border-bottom:1px solid #eee;">
             <img src="${item.image}" alt="${item.name}" style="width:80px; height:80px; object-fit:contain;">
@@ -342,7 +313,6 @@ function displayCart() {
             <button class="btn btn-small" style="background:#ff4444;color:white;" onclick="removeFromCart(${item.id})">Remove</button>
         </div>
     `).join('');
-
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     if (cartTotal) cartTotal.textContent = 'Total: ' + formatPrice(total);
     updateCartCount();
@@ -352,9 +322,7 @@ function changeQty(productId, change) {
     const item = cart.find(i => i.id === productId);
     if (!item) return;
     item.quantity += change;
-    if (item.quantity <= 0) {
-        cart = cart.filter(i => i.id !== productId);
-    }
+    if (item.quantity <= 0) cart = cart.filter(i => i.id !== productId);
     localStorage.setItem('techvibe_cart', JSON.stringify(cart));
     displayCart();
     updateCartCount();
@@ -367,78 +335,7 @@ function removeFromCart(productId) {
     updateCartCount();
 }
 
-        function updateCharCount() {
-            document.getElementById('char-count').textContent = document.getElementById('message').value.length;
-        }
-
-        function validateForm() {
-            let valid = true;
-            const fields = [
-                { id: 'firstName', errorId: 'firstName-error', check: v => v.trim().length >= 2 },
-                { id: 'lastName',  errorId: 'lastName-error',  check: v => v.trim().length >= 2 },
-                { id: 'email',     errorId: 'email-error',     check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
-                { id: 'subject',   errorId: 'subject-error',   check: v => v !== '' },
-                { id: 'message',   errorId: 'message-error',   check: v => v.trim().length >= 10 },
-            ];
-            fields.forEach(({ id, errorId, check }) => {
-                const el = document.getElementById(id);
-                const err = document.getElementById(errorId);
-                if (!check(el.value)) {
-                    el.classList.add('error');
-                    err.classList.add('show');
-                    valid = false;
-                } else {
-                    el.classList.remove('error');
-                    err.classList.remove('show');
-                }
-            });
-            return valid;
-        }
-
-        ['firstName','lastName','email','subject','message'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.addEventListener('input', () => {
-                el.classList.remove('error');
-                document.getElementById(id + '-error').classList.remove('show');
-            });
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (!validateForm()) return;
-            const btn = document.getElementById('submit-btn');
-            btn.textContent = 'Sending...';
-            btn.disabled = true;
-            fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this),
-                headers: { 'Accept': 'application/json' }
-            }).then(() => showSuccess()).catch(() => showSuccess());
-        });
-
-        function showSuccess() {
-            document.getElementById('contact-form').style.display = 'none';
-            document.getElementById('success-message').classList.add('show');
-        }
-
-        function resetForm() {
-            document.getElementById('contact-form').reset();
-            document.getElementById('contact-form').style.display = 'block';
-            document.getElementById('success-message').classList.remove('show');
-            document.getElementById('submit-btn').textContent = 'Send Message ✉️';
-            document.getElementById('submit-btn').disabled = false;
-            document.getElementById('char-count').textContent = '0';
-        }
-
-        function toggleFaq(btn) {
-            const item = btn.parentElement;
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
-        }
-
-
-// ── FILTER BUTTONS ───────────────────────────────────────────
+// ── FILTER BUTTONS ────────────────────────────────────────────
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
@@ -455,7 +352,7 @@ function setupFilters() {
     });
 }
 
-// ── LOAD CART COUNT ON EVERY PAGE ────────────────────────────
+// ── LOAD CART COUNT ON EVERY PAGE ─────────────────────────────
 function loadCartFromStorage() {
     const saved = localStorage.getItem('techvibe_cart');
     if (saved) {
@@ -464,13 +361,11 @@ function loadCartFromStorage() {
     }
 }
 
-// ── DARK MODE ────────────────────────────────────────────────
+// ── DARK MODE ─────────────────────────────────────────────────
 function toggleTheme() {
     const body = document.body;
     const icon = document.querySelector('.theme-icon');
-
     body.classList.toggle('dark-mode');
-
     if (body.classList.contains('dark-mode')) {
         if (icon) icon.textContent = '☀️';
         localStorage.setItem('techvibe_theme', 'dark');
@@ -483,7 +378,6 @@ function toggleTheme() {
 function loadTheme() {
     const saved = localStorage.getItem('techvibe_theme');
     const icon = document.querySelector('.theme-icon');
-
     if (saved === 'dark') {
         document.body.classList.add('dark-mode');
         if (icon) icon.textContent = '☀️';
@@ -492,13 +386,12 @@ function loadTheme() {
     }
 }
 
-// ── INIT ─────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Page loaded — initialising TechVibe...');
-
     loadCartFromStorage();
     displayProducts();
-    displayFeaturedProducts();  // now builds the carousel
+    displayFeaturedProducts();
     displayCart();
     setupFilters();
     loadTheme();
