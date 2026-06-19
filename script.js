@@ -101,7 +101,8 @@ const products = [
         price: 2699,
         category: "accessories",
         image: "https://thefoschini.vtexassets.com/arquivos/ids/222978508-1200-1600?v=639015738519300000&width=1200&height=1600&aspect=true",
-        description: "Dual Noise Sensor technology delivers stronger, more effective noise cancelling so you can stay immersed in your music anywhere."
+        description: //"Dual Noise Sensor technology delivers stronger, 
+        "more effective noise cancelling so you can stay immersed in your music anywhere."
     },
     {
         id: 14,
