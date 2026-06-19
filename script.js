@@ -184,7 +184,7 @@ function displayFeaturedProducts() {
     if (!track) return; // not on home page, do nothing
 
     // ✅ Update these IDs whenever you add new products
-    carouselItems = products.filter(p => [8, 10, 11, 12, 13, 14, 15].includes(p.id));
+    carouselItems = products.filter(p => [8, 10, 11, 12, 14, 15].includes(p.id));
 
     const cardsVisible = getCardsVisible();
 
