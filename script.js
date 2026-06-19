@@ -335,6 +335,112 @@ function removeFromCart(productId) {
     updateCartCount();
 }
 
+const promoCodes = {
+            'TechNewbbie': { discount: 0.10, label: '10% OFF' },
+            'NEWUSER20':  { discount: 0.20, label: '20% OFF' },
+            'SAVE5':      { discount: 0.05, label: '5% OFF' },
+            'TECHVIBE10':   { discount: 0.15, label: '15% OFF' },
+        };
+        let appliedPromo = null;
+
+        function applyPromo() {
+            const input = document.getElementById('promo-input');
+            const message = document.getElementById('promo-message');
+            const code = input.value.trim().toUpperCase();
+            if (!code) {
+                message.textContent = 'Please enter a promo code.';
+                message.className = 'promo-message promo-error';
+                return;
+            }
+            if (promoCodes[code]) {
+                appliedPromo = { ...promoCodes[code], code };
+                message.textContent = '✅ Code "' + code + '" applied — ' + appliedPromo.label + '!';
+                message.className = 'promo-message promo-success';
+                input.disabled = true;
+                renderCartSummary();
+            } else {
+                appliedPromo = null;
+                message.textContent = '❌ Invalid promo code. Try again.';
+                message.className = 'promo-message promo-error';
+                renderCartSummary();
+            }
+        }
+
+        document.getElementById('promo-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') applyPromo();
+        });
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            if (confirm('Are you sure you want to clear your entire cart?')) {
+                cart = [];
+                localStorage.setItem('techvibe_cart', JSON.stringify(cart));
+                renderCartPage();
+                updateCartCount();
+            }
+        }
+
+        function renderCartPage() {
+            const cartContainer = document.getElementById('cart-items');
+            const headerCount = document.getElementById('cart-header-count');
+            const saved = localStorage.getItem('techvibe_cart');
+            if (saved) cart = JSON.parse(saved);
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (headerCount) headerCount.textContent = totalItems + ' item' + (totalItems !== 1 ? 's' : '');
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<div class="empty-cart"><div class="empty-cart-icon">🛒</div><h2>Your cart is empty</h2><p>Looks like you haven\'t added anything yet.</p><a href="products.html" class="btn btn-primary">Browse Products</a></div>';
+                renderCartSummary();
+                return;
+            }
+            cartContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-unit-price">${formatPrice(item.price)} each</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+                        <span class="qty-number">${item.quantity}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                    <div class="cart-item-total">${formatPrice(item.price * item.quantity)}</div>
+                    <button class="remove-btn" onclick="removeFromCart(${item.id})" title="Remove">✕</button>
+                </div>
+            `).join('');
+            renderCartSummary();
+            updateCartCount();
+        }
+
+        function renderCartSummary() {
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const delivery = subtotal >= 5000 ? 0 : 99;
+            let discount = 0;
+            if (appliedPromo && cart.length > 0) discount = subtotal * appliedPromo.discount;
+            const total = subtotal - discount + delivery;
+            document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('summary-delivery').textContent = delivery === 0 ? '🎉 FREE' : formatPrice(delivery);
+            document.getElementById('cart-total').textContent = formatPrice(total);
+            const discountRow = document.getElementById('discount-row');
+            if (discount > 0) {
+                discountRow.style.display = 'flex';
+                document.getElementById('discount-label').textContent = appliedPromo.label;
+                document.getElementById('summary-discount').textContent = '- ' + formatPrice(discount);
+            } else {
+                discountRow.style.display = 'none';
+            }
+            const deliveryMsg = document.getElementById('delivery-message');
+            if (delivery === 0) {
+                deliveryMsg.textContent = '🎉 You qualify for FREE delivery!';
+            } else {
+                const remaining = 5000 - subtotal;
+                deliveryMsg.textContent = remaining > 0 ? 'Add ' + formatPrice(remaining) + ' more for FREE delivery' : '🎉 You qualify for FREE delivery!';
+            }
+        }
+
+        renderCartPage();
+
+
 // ── FILTER BUTTONS ────────────────────────────────────────────
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
