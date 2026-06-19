@@ -3,89 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVibe-Home</title>
-
-    <link rel="stylesheet" href="style.css" >
+    <title>TechVibe – South Africa's Tech Store</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
-            <h2 class="logo">TechVibe</h2>
+            <a href="index.html" class="logo">TechVibe</a>
             <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html" class="cart-link">Cart (0)</a></li>
+                <li><a href="cart.html" class="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
             </ul>
-
             <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-        <span class="theme-icon">🌙</span>
-        </button>
-
+                <span class="theme-icon">🌙</span>
+            </button>
         </div>
-        
     </nav>
 
-    
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to TechVibe!</h1>
-            <p>Find the best South Africa's Electronics go-to store in the plam of your hand!
-                at an amazing price that makes sense to your pockets.</p>
-            <a href="products.html" class="btn">Shop Now!</a>
+            <span class="hero-badge">🇿🇦 South Africa's Tech Destination</span>
+            <h1>Premium Tech.<br>Real Prices.</h1>
+            <p>Phones, laptops, and accessories — delivered nationwide across all 9 provinces.</p>
+            <div class="hero-actions">
+                <a href="products.html" class="btn btn-primary">Shop Now</a>
+                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+            </div>
         </div>
     </section>
 
-    <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
             <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
         </div>
     </div>
-    
 
     <section class="featured">
         <div class="container">
-            <h2>NEW Arrivals</h2>
-            <div class="products-grid" id="featured-products">
-                <!----Products will come frpm JavaScrip here---->
+            <div class="section-header">
+                <h2>New Arrivals</h2>
+                <span class="section-tag">Just landed in store</span>
             </div>
 
             <div class="carousel-wrapper">
-            <!-- Left Arrow -->
-            <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">&#8592;</button>
-
-            <!-- Sliding Track -->
-            <div class="carousel-track-container">
-                <div class="carousel-track" id="carousel-track">
-                    <!-- Products injected by JavaScript -->
+                <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)" aria-label="Previous">&#8592;</button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="carousel-track"></div>
                 </div>
+                <button class="carousel-btn next-btn" onclick="moveCarousel(1)" aria-label="Next">&#8594;</button>
             </div>
-
-            <!-- Right Arrow -->
-            <button class="carousel-btn next-btn" onclick="moveCarousel(1)">&#8594;</button>
-        </div>
-
-        <!-- Dots navigation -->
-        <div class="carousel-dots" id="carousel-dots"></div>
-
+            <div class="carousel-dots" id="carousel-dots"></div>
         </div>
     </section>
 
-    <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
             <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
         </div>
     </div>
 
     <footer class="footer">
-        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved</p>
-
+        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>

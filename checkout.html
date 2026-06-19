@@ -3,44 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVibe-Home</title>
-
-    <link rel="stylesheet" href="style.css" >
+    <title>TechVibe – Checkout</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
-            <h2 class="logo">TechVibe</h2>
+            <a href="index.html" class="logo">TechVibe</a>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html" class="cart-link">Cart (0)</a></li>
+                <li><a href="cart.html" class="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
             </ul>
-
             <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-        <span class="theme-icon">🌙</span>
-        </button>
-
+                <span class="theme-icon">🌙</span>
+            </button>
         </div>
-        
     </nav>
 
-   
-
-        <div class="checkout-page">
+    <div class="checkout-page">
         <div class="container">
             <h1>🔒 Secure Checkout</h1>
 
-             <!-- Price Disclaimer Banner -->
-    <div class="ticker-wrapper">
-        <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
-            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
-        </div>
-    </div>
+            <div class="ticker-wrapper">
+                <div class="ticker-content">
+                    <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+                    <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+                    <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+                    <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+                    <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+                    <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+                </div>
+            </div>
 
+            <!-- Step Indicators -->
             <div class="checkout-steps">
                 <div class="step active" id="step-indicator-1">
                     <div class="step-circle">1</div>
@@ -65,51 +63,51 @@
 
             <div class="checkout-layout">
                 <div>
-                    <!-- STEP 1 -->
+                    <!-- STEP 1: Delivery -->
                     <div class="step-panel active" id="panel-1">
                         <h2>📦 Delivery Details</h2>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="firstName">First Name *</label>
-                                <input type="text" id="firstName" placeholder="Your Name">
-                                <div class="field-error" id="firstName-error">Required</div>
+                                <label for="co-firstName">First Name *</label>
+                                <input type="text" id="co-firstName" placeholder="Your first name">
+                                <div class="field-error" id="co-firstName-error">Required</div>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name *</label>
-                                <input type="text" id="lastName" placeholder="Your Last Name">
-                                <div class="field-error" id="lastName-error">Required</div>
+                                <label for="co-lastName">Last Name *</label>
+                                <input type="text" id="co-lastName" placeholder="Your last name">
+                                <div class="field-error" id="co-lastName-error">Required</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" placeholder="you@example.com">
-                            <div class="field-error" id="email-error">Enter a valid email</div>
+                            <label for="co-email">Email Address *</label>
+                            <input type="email" id="co-email" placeholder="you@example.com">
+                            <div class="field-error" id="co-email-error">Enter a valid email</div>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" placeholder="071 000 0000" maxlength="10">
-                            <div class="field-error" id="phone-error">Enter a 10-digit SA number</div>
+                            <label for="co-phone">Phone Number *</label>
+                            <input type="tel" id="co-phone" placeholder="071 000 0000" maxlength="10">
+                            <div class="field-error" id="co-phone-error">Enter a 10-digit SA number</div>
                         </div>
                         <div class="form-group">
-                            <label for="address">Street Address *</label>
-                            <input type="text" id="address" placeholder="123 Main Street">
-                            <div class="field-error" id="address-error">Required</div>
+                            <label for="co-address">Street Address *</label>
+                            <input type="text" id="co-address" placeholder="123 Main Street">
+                            <div class="field-error" id="co-address-error">Required</div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="city">City / Town *</label>
-                                <input type="text" id="city" placeholder="Yor City">
-                                <div class="field-error" id="city-error">Required</div>
+                                <label for="co-city">City / Town *</label>
+                                <input type="text" id="co-city" placeholder="Your city">
+                                <div class="field-error" id="co-city-error">Required</div>
                             </div>
                             <div class="form-group">
-                                <label for="postalCode">Postal Code *</label>
-                                <input type="text" id="postalCode" placeholder="2745" maxlength="4">
-                                <div class="field-error" id="postalCode-error">Enter 4-digit code</div>
+                                <label for="co-postalCode">Postal Code *</label>
+                                <input type="text" id="co-postalCode" placeholder="2745" maxlength="4">
+                                <div class="field-error" id="co-postalCode-error">Enter 4-digit code</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="province">Province *</label>
-                            <select id="province">
+                            <label for="co-province">Province *</label>
+                            <select id="co-province">
                                 <option value="">— Select your province —</option>
                                 <option value="Eastern Cape">Eastern Cape</option>
                                 <option value="Free State">Free State</option>
@@ -118,18 +116,18 @@
                                 <option value="Limpopo">Limpopo</option>
                                 <option value="Mpumalanga">Mpumalanga</option>
                                 <option value="Northern Cape">Northern Cape</option>
-                                <option value="North West" selected>North West</option>
+                                <option value="North West">North West</option>
                                 <option value="Western Cape">Western Cape</option>
                             </select>
-                            <div class="field-error" id="province-error">Please select a province</div>
+                            <div class="field-error" id="co-province-error">Please select a province</div>
                         </div>
                         <div class="step-nav">
-                            <a href="cart.html" class="btn-back" style="text-decoration:none;text-align:center;line-height:2;">← Back to Cart</a>
+                            <a href="cart.html" class="btn-back" style="text-decoration:none;text-align:center;line-height:2.8;">← Back to Cart</a>
                             <button class="btn-next" onclick="goToStep(2)">Continue to Review →</button>
                         </div>
                     </div>
 
-                    <!-- STEP 2 -->
+                    <!-- STEP 2: Review -->
                     <div class="step-panel" id="panel-2">
                         <h2>🧾 Review Your Order</h2>
                         <div id="review-items"></div>
@@ -140,7 +138,7 @@
                         </div>
                     </div>
 
-                    <!-- STEP 3 -->
+                    <!-- STEP 3: Payment -->
                     <div class="step-panel" id="panel-3">
                         <h2>💳 Payment Method</h2>
                         <label class="payment-option selected" onclick="selectPayment('card', this)">
@@ -154,21 +152,21 @@
                         <div class="card-fields show" id="card-fields">
                             <div class="form-group">
                                 <label>Card Number</label>
-                                <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Expiry Date</label>
-                                    <input type="text" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)">
+                                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)">
                                 </div>
                                 <div class="form-group">
                                     <label>CVV</label>
-                                    <input type="text" placeholder="123" maxlength="3">
+                                    <input type="text" id="card-cvv" placeholder="123" maxlength="3">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Name on Card</label>
-                                <input type="text" placeholder="Same as in your Card">
+                                <input type="text" id="card-name" placeholder="Same as on your card">
                             </div>
                         </div>
                         <label class="payment-option" onclick="selectPayment('snapscan', this)">
@@ -201,7 +199,7 @@
                         </div>
                     </div>
 
-                    <!-- STEP 4 -->
+                    <!-- STEP 4: Confirmation -->
                     <div class="step-panel" id="panel-4">
                         <div class="confirmed-panel">
                             <div class="confirmed-icon">🎉</div>
@@ -218,13 +216,13 @@
                             <p style="font-size:13px;color:#94a3b8;">Estimated delivery: <strong>3–5 business days</strong></p>
                             <div style="margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
                                 <a href="products.html" class="btn btn-primary">Continue Shopping</a>
-                                <a href="index.html" class="btn" style="background:#e2e8f0;color:#374151;">Go to Home</a>
+                                <a href="index.html" class="btn btn-outline">Go to Home</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- SIDEBAR -->
+                <!-- Sidebar -->
                 <div class="order-sidebar" id="order-sidebar">
                     <h3>🛒 Order Summary</h3>
                     <div id="sidebar-items"></div>
@@ -239,23 +237,21 @@
         </div>
     </div>
 
-    
-    <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
             <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
         </div>
     </div>
 
     <footer class="footer">
-        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved</p>
-
+        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-

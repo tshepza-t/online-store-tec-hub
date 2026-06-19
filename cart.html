@@ -3,54 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVibe-Cart</title>
-
-    <link rel="stylesheet" href="style.css" >
+    <title>TechVibe – Your Cart</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
-            <h2 class="logo">TechVibe</h2>
+            <a href="index.html" class="logo">TechVibe</a>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html" class="cart-link">Cart (0)</a></li>
+                <li><a href="cart.html" class="cart-link active">Cart (<span id="cart-count">0</span>)</a></li>
             </ul>
-
             <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-        <span class="theme-icon">🌙</span>
-        </button>
-
+                <span class="theme-icon">🌙</span>
+            </button>
         </div>
-        
     </nav>
 
-    
-
-        <div class="cart-page">
+    <div class="cart-page">
         <div class="container">
             <h1>🛒 Your Cart</h1>
 
-            <!-- Price Disclaimer Banner -->
-    <div class="ticker-wrapper">
-        <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
-            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
-        </div>
-    </div>
+            <div class="ticker-wrapper">
+                <div class="ticker-content">
+                    <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+                    <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+                    <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+                    <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+                    <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+                    <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+                </div>
+            </div>
 
             <div class="cart-layout">
                 <div class="cart-items-section">
                     <div class="cart-items-header">
-
-                        
                         <span id="cart-header-count">0 items</span>
                         <button class="clear-cart-btn" onclick="clearCart()">🗑 Clear Cart</button>
                     </div>
                     <div id="cart-items"></div>
                 </div>
+
                 <div class="order-summary">
                     <h3>Order Summary</h3>
                     <div class="summary-row">
@@ -87,21 +83,21 @@
         </div>
     </div>
 
-    <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
             <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
         </div>
     </div>
 
     <footer class="footer">
-        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved</p>
-
+        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-

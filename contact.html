@@ -3,59 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVibe-Contact</title>
-
-    <link rel="stylesheet" href="style.css" >
+    <title>TechVibe – Contact Us</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
-            <h2 class="logo">TechVibe</h2>
+            <a href="index.html" class="logo">TechVibe</a>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html" class="cart-link">Cart (0)</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="cart.html" class="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
             </ul>
-
             <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-        <span class="theme-icon">🌙</span>
-        </button>
-
+                <span class="theme-icon">🌙</span>
+            </button>
         </div>
-        
     </nav>
 
-   
     <div class="contact-page">
         <div class="container">
             <div class="contact-hero">
-                <h1> Get In Touch</h1>
-                <p>Have a question about an order or product? We're here to help — reach out and we'll respond within ( 24 - 48) working hours.</p>
+                <h1>Get In Touch</h1>
+                <p>Have a question about an order or product? We're here to help — reach out and we'll respond within 24–48 working hours.</p>
             </div>
 
-             <!-- Price Disclaimer Banner -->
-    <div class="ticker-wrapper">
-        <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
-            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
-        </div>
-    </div>
+            <div class="ticker-wrapper">
+                <div class="ticker-content">
+                    <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+                    <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+                    <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+                    <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+                    <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+                    <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+                </div>
+            </div>
 
             <div class="contact-grid">
+                <!-- Contact Form -->
                 <div class="contact-form-card">
                     <h2>Send Us a Message</h2>
-                    <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+                    <div id="contact-form-wrap">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name *</label>
-                                <input type="text" id="firstName" name="firstName" placeholder="Your Name">
+                                <input type="text" id="firstName" name="firstName" placeholder="Your first name">
                                 <div class="field-error" id="firstName-error">Please enter your first name</div>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name *</label>
-                                <input type="text" id="lastName" name="lastName" placeholder="Your Last Name">
+                                <input type="text" id="lastName" name="lastName" placeholder="Your last name">
                                 <div class="field-error" id="lastName-error">Please enter your last name</div>
                             </div>
                         </div>
@@ -66,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number (optional)</label>
-                            <input type="tel" id="phone" name="phone" placeholder="012 894 8853" maxlength="10">
+                            <input type="tel" id="phone" name="phone" placeholder="071 000 0000" maxlength="10">
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject *</label>
@@ -75,7 +74,7 @@
                                 <option value="General Enquiry">General Enquiry</option>
                                 <option value="Order Issue">Order Issue</option>
                                 <option value="Product Question">Product Question</option>
-                                <option value="Returns & Refunds">Returns & Refunds</option>
+                                <option value="Returns & Refunds">Returns &amp; Refunds</option>
                                 <option value="Delivery Query">Delivery Query</option>
                                 <option value="Technical Support">Technical Support</option>
                                 <option value="Other">Other</option>
@@ -88,15 +87,18 @@
                             <div class="char-count"><span id="char-count">0</span>/500 characters</div>
                             <div class="field-error" id="message-error">Please enter a message (at least 10 characters)</div>
                         </div>
-                        <button type="submit" class="submit-btn" id="submit-btn">Send Message ✉️</button>
-                    </form>
+                        <button type="button" class="submit-btn" id="submit-btn" onclick="submitContactForm()">Send Message ✉️</button>
+                    </div>
+
                     <div class="success-message" id="success-message">
                         <div class="success-icon">✅</div>
                         <h3>Message Sent!</h3>
-                        <p>Thanks for reaching out. We'll get back to you within working hours (24 - 48).</p>
-                        <button class="btn btn-primary" onclick="resetForm()">Send Another Message</button>
+                        <p>Thanks for reaching out. We'll get back to you within 24–48 working hours.</p>
+                        <button class="btn btn-primary" onclick="resetContactForm()">Send Another Message</button>
                     </div>
                 </div>
+
+                <!-- Contact Info -->
                 <div class="contact-info-card">
                     <h3>Contact Information</h3>
                     <div class="info-item">
@@ -128,64 +130,63 @@
                         </div>
                     </div>
                     <div class="response-banner">
-                        ⚡ Average response time: <strong style="color:white;margin-left:4px;">within 24 hours</strong>
+                        ⚡ Average response time: <strong>within 24 hours</strong>
                     </div>
                     <div class="social-links">
-                        <a href="https://linkedin.com/in/tshepang-taele-850b952b1" target="_blank" class="social-link" title="LinkedIn">💼</a>
-                        <a href="https://github.com/tshepza-t" target="_blank" class="social-link" title="GitHub">🐙</a>
+                        <a href="https://linkedin.com/in/tshepang-taele-850b952b1" target="_blank" rel="noopener" class="social-link" title="LinkedIn">💼</a>
+                        <a href="https://github.com/tshepza-t" target="_blank" rel="noopener" class="social-link" title="GitHub">🐙</a>
                         <a href="mailto:support@techvibe.co.za" class="social-link" title="Email">📧</a>
                     </div>
                 </div>
             </div>
 
+            <!-- FAQ -->
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <p class="faq-subtitle">Quick answers to the most common questions</p>
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">How long does delivery take?<span class="faq-icon">+</span></button>
-                        <div class="faq-answer">Standard delivery takes 3–5 business days to major cities. Remote areas may take 5–7 business days. Or more depending on the Products availability</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">How long does delivery take? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">Standard delivery takes 3–5 business days to major cities. Remote areas may take 5–7 business days, depending on product availability.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Can I return a product?<span class="faq-icon">+</span></button>
-                        <div class="faq-answer">Yes. You can return any product within 7 days of delivery, unused and in original packaging with proof of purchase. T&Cs apply</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Can I return a product? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">Yes. You can return any product within 7 days of delivery, unused and in original packaging, with proof of purchase. T&amp;Cs apply.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Do you deliver nationwide?<span class="faq-icon">+</span></button>
-                        <div class="faq-answer">Yes — we deliver to all 9 South African provinces which includs Gauteng, Western Cape, KwaZulu-Natal, North West, and many more.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Do you deliver nationwide? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">Yes — we deliver to all 9 South African provinces including Gauteng, Western Cape, KwaZulu-Natal, North West, Limpopo, and more.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">How do I track my order?<span class="faq-icon">+</span></button>
+                        <button class="faq-question" onclick="toggleFaq(this)">How do I track my order? <span class="faq-icon">+</span></button>
                         <div class="faq-answer">After placing your order you will receive a confirmation email with your order number and a tracking link.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Are the products genuine?<span class="faq-icon">+</span></button>
-                        <div class="faq-answer">All products sold on TechVibe are genuine. Prices are of TechVibe store prices and may differ from official manufacturer pricing.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">Are the products genuine? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">All products sold on TechVibe are genuine. Prices are TechVibe store prices and may differ from official manufacturer pricing.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">What payment methods do we accept?<span class="faq-icon">+</span></button>
-                        <div class="faq-answer">We accept Credit/Debit Cards, EFT/Bank Transfer, and Capitec Pay. All transactions are secured.</div>
+                        <button class="faq-question" onclick="toggleFaq(this)">What payment methods do you accept? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">We accept Credit/Debit Cards, EFT/Bank Transfer, SnapScan, and Capitec Pay. All transactions are secured with SSL encryption.</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-    <!-- Price Disclaimer Banner -->
     <div class="ticker-wrapper">
         <div class="ticker-content">
-            <span>⚠️ Please note: All prices displayed are TechVibe store prices and do not reflect original manufacturer pricing.</span>
-            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing for your convenience.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
+            <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
+            <span>⚠️ All prices are TechVibe store prices and do not reflect original manufacturer pricing.</span>
+            <span>🛍️ Prices may vary from official retail stores — TechVibe offers competitive pricing.</span>
             <span>💡 All prices are in South African Rands (ZAR) and are subject to change without notice.</span>
         </div>
     </div>
 
     <footer class="footer">
-        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved</p>
-
+        <p><strong>&copy; 2026 TechVibe.</strong> All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
